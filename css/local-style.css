@@ -1,0 +1,23 @@
+.slider {
+  /* default is width 400 and margin 10 
+	/width: 250;
+	margin: 10px;*/
+}
+
+#food_table {
+  margin: 35px auto 15px;
+  width: 500;
+  height: 250;
+  align-content: center;
+  text-align: center; 
+  vertical-align: middle;
+}
+
+
+
+td img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
