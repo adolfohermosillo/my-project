@@ -4,6 +4,11 @@
 	margin: 10px;*/
 }
 
+
+#slide {
+   text-align: left; 
+}
+
 #food_table {
   margin: 35px auto 15px;
   width: 500;
