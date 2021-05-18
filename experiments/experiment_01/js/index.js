@@ -141,11 +141,11 @@ function init() {
   var eat_maximal = ['cookie','banana'];
   var eat_non_maximal = ['apple','wing'];
   var drink_maximal = ['beer','water']; 
-  var drink_non_maximal = ['tea','coke'];
+  var drink_non_maximal = ['tea','soda'];
 
-  var sentences = {"tea" : "Andy drank the shake",
+  var sentences = {"tea" : "Andy drank the tea",
           "water" : "Andy drank the water",
-          "coke" : "Andy drank the soda",
+          "soda" : "Andy drank the soda",
           "beer" : "Andy drank the beer",
           "apple" : "Andy ate the apple",
           "banana" : "Andy ate the banana",
@@ -155,7 +155,7 @@ function init() {
 
   var maximality = {"tea" : "partial",
           "water" : "maximal",
-          "coke" : "partial",
+          "soda" : "partial",
           "beer" : "maximal",
           "apple" : "partial",
           "banana" : "maximal",
