@@ -165,7 +165,7 @@ function init() {
 
   var healthy = {"tea" : "healthy",
           "water" : "healthy",
-          "coke" : "unhealthy",
+          "soda" : "unhealthy",
           "beer" : "unhealthy",
           "apple" : "healthy",
           "banana" : "healthy",
