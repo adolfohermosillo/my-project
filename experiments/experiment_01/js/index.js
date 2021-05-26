@@ -220,7 +220,7 @@ function init() {
 
 
 
-  exp.stims = (_.sample((items), 1));
+  exp.stims = (_.sample((items), 16));
 
   exp.system = {
       Browser : BrowserDetect.browser,
