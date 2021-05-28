@@ -86,9 +86,10 @@ function make_slides(f) {
         "item" : this.stim.item,
         //"condition" : this.stim.condition,
         "state" : this.stim.state,
-        "maximal" : this.stim.maximal,
+        "maximality" : this.stim.maximal,
         "stim" : this.stim.sentence,
-        "response" : exp.response
+        "item_type" : this.stim.item_type,
+        "response" : exp.response.toUpperCase()
     });
 
     }
@@ -123,7 +124,7 @@ function make_slides(f) {
           "subject_information" : exp.subj_data,
           "time_in_minutes" : (Date.now() - exp.startT)/60000
       };
-      setTimeout(function() {turk.submit(exp.data);}, 1000);
+      setTimeout(function() {proliferate.submit(exp.data);}, 1000);
     }
   });
 
@@ -140,37 +141,28 @@ function init() {
   // items to choose from
   var eat_maximal = ['cookie','banana'];
   var eat_non_maximal = ['apple','wing'];
-  var drink_maximal = ['beer','water']; 
-  var drink_non_maximal = ['tea','soda'];
+  var drink_maximal = ['coffee','tea']; 
+  var drink_non_maximal = ['whiskey','soda'];
 
   var sentences = {"tea" : "Andy drank the tea",
-          "water" : "Andy drank the water",
+          "coffee" : "Andy drank the coffee",
           "soda" : "Andy drank the soda",
-          "beer" : "Andy drank the beer",
+          "whiskey" : "Andy drank the whiskey",
           "apple" : "Andy ate the apple",
           "banana" : "Andy ate the banana",
           "wing" : "Andy ate the wing",
           "cookie" : "Andy ate the cookie",
   }
 
-  var maximality = {"tea" : "partial",
-          "water" : "maximal",
-          "soda" : "partial",
-          "beer" : "maximal",
-          "apple" : "partial",
-          "banana" : "maximal",
-          "wing" : "partial",
-          "cookie" : "maximal",
-  }
 
-  var healthy = {"tea" : "healthy",
-          "water" : "healthy",
-          "coke" : "unhealthy",
-          "beer" : "unhealthy",
-          "apple" : "healthy",
-          "banana" : "healthy",
-          "wing" : "unhealthy",
-          "cookie" : "unhealthy",
+  var maximality = {"whiskey" : "partial",
+          "apple" : "partial",
+          "soda" : "partial",
+          "wing" : "partial",
+          "tea" : "maximal",
+          "coffee" : "maximal",
+          "banana" : "maximal",
+          "cookie" : "maximal",
   }
 
   //states: event progressions
@@ -187,26 +179,30 @@ function init() {
 
 
   var items =  [    
+    
     //critical items
-    {item: eat_maximal[0], state: critical_states[0], maximal: maximality[eat_maximal[0]], healthy: healthy[eat_maximal[0]], sentence: sentences[eat_maximal[0]] },
-    {item: eat_non_maximal[0], state: critical_states[1], maximal: maximality[eat_non_maximal[0]], healthy: healthy[eat_non_maximal[0]], sentence: sentences[eat_non_maximal[0]] },
-    {item: drink_maximal[0], state: critical_states[2], maximal: maximality[drink_maximal[0]], healthy: healthy[drink_maximal[0]], sentence: sentences[drink_maximal[0]] },
-    {item: drink_non_maximal[0], state: critical_states[3], maximal: maximality[drink_non_maximal[0]], healthy: healthy[drink_non_maximal[0]], sentence: sentences[drink_non_maximal[0]] },
+    {verb: 'eat' , item: eat_maximal[0], state: critical_states[0], maximal: maximality[eat_maximal[0]], sentence: sentences[eat_maximal[0]], item_type:'critical'},
+    {verb: 'eat' , item: eat_non_maximal[0], state: critical_states[1], maximal: maximality[eat_non_maximal[0]], sentence: sentences[eat_non_maximal[0]], item_type:'critical'},
+    {verb: 'drink' , item: drink_maximal[0], state: critical_states[2], maximal: maximality[drink_maximal[0]], sentence: sentences[drink_maximal[0]], item_type:'critical' },
+    {verb: 'drink' ,item: drink_non_maximal[0], state: critical_states[3], maximal: maximality[drink_non_maximal[0]], sentence: sentences[drink_non_maximal[0]], item_type:'critical' },
 
-    {item: eat_maximal[1], state: filler_states[0], maximal: maximality[eat_maximal[1]], healthy: healthy[eat_maximal[1]], sentence: sentences[eat_maximal[1]] },
-    {item: eat_non_maximal[1], state: filler_states[1], maximal: maximality[eat_non_maximal[1]], healthy: healthy[eat_non_maximal[1]], sentence: sentences[eat_non_maximal[1]] },
-    {item: drink_maximal[1], state: filler_states[2], maximal: maximality[drink_maximal[1]], healthy: healthy[drink_maximal[1]], sentence: sentences[drink_maximal[1]] },
-    {item: drink_non_maximal[1], state: filler_states[3], maximal: maximality[drink_non_maximal[1]], healthy: healthy[drink_non_maximal[1]], sentence: sentences[drink_non_maximal[1]] },
+    //filler
+    {verb: 'eat' , item: eat_maximal[1], state: filler_states[0], maximal: maximality[eat_maximal[1]], sentence: sentences[eat_maximal[1]], item_type:'filler'},
+    {verb: 'eat' , item: eat_non_maximal[1], state: filler_states[1], maximal: maximality[eat_non_maximal[1]], sentence: sentences[eat_non_maximal[1]], item_type:'filler' },
+    {verb: 'drink' ,item: drink_maximal[1], state: filler_states[2], maximal: maximality[drink_maximal[1]], sentence: sentences[drink_maximal[1]], item_type:'filler' },
+    {verb: 'drink' ,item: drink_non_maximal[1], state: filler_states[3], maximal: maximality[drink_non_maximal[1]], sentence: sentences[drink_non_maximal[1]],item_type:'filler' },
 
-    {item: eat_maximal[0], state: 6, maximal: maximality[eat_maximal[0]], healthy: healthy[eat_maximal[0]], sentence: sentences[eat_maximal[0]] },
-    {item: eat_non_maximal[0], state: 6, maximal: maximality[eat_non_maximal[0]], healthy: healthy[eat_non_maximal[0]], sentence: sentences[eat_non_maximal[0]] },
-    {item: drink_maximal[0], state: 6, maximal: maximality[drink_maximal[0]], healthy: healthy[drink_maximal[0]], sentence: sentences[drink_maximal[0]] },
-    {item: drink_non_maximal[0], state: 6, maximal: maximality[drink_non_maximal[0]], healthy: healthy[drink_non_maximal[0]], sentence: sentences[drink_non_maximal[0]] },
+    //baseline
+    {verb: 'eat' , item: eat_maximal[0], state: 5, maximal: maximality[eat_maximal[0]], sentence: sentences[eat_maximal[0]], item_type:'baseline' },
+    {verb: 'eat' , item: eat_non_maximal[0], state: 5, maximal: maximality[eat_non_maximal[0]], sentence: sentences[eat_non_maximal[0]], item_type:'baseline' },
+    {verb: 'drink' ,item: drink_maximal[0], state: 5, maximal: maximality[drink_maximal[0]], sentence: sentences[drink_maximal[0]], item_type:'baseline' },
+    {verb: 'drink' ,item: drink_non_maximal[0], state: 5, maximal: maximality[drink_non_maximal[0]], sentence: sentences[drink_non_maximal[0]], item_type:'baseline'},
 
-    {item: eat_maximal[1], state: 0, maximal: maximality[eat_maximal[1]], healthy: healthy[eat_maximal[1]], sentence: sentences[eat_maximal[1]] },
-    {item: eat_non_maximal[1], state: 0, maximal: maximality[eat_non_maximal[1]], healthy: healthy[eat_non_maximal[1]], sentence: sentences[eat_non_maximal[1]] },
-    {item: drink_maximal[1], state: 0, maximal: maximality[drink_maximal[1]], healthy: healthy[drink_maximal[1]], sentence: sentences[drink_maximal[1]] },
-    {item: drink_non_maximal[1], state: 0, maximal: maximality[drink_non_maximal[1]], healthy: healthy[drink_non_maximal[1]], sentence: sentences[drink_non_maximal[1]] },
+    //control
+    {verb: 'eat' ,item: eat_maximal[1], state: 0, maximal: maximality[eat_maximal[1]], sentence: sentences[eat_maximal[1]],  item_type:'control'},
+    {verb: 'eat' ,item: eat_non_maximal[1], state: 0, maximal: maximality[eat_non_maximal[1]], sentence: sentences[eat_non_maximal[1]],  item_type:'control' },
+    {verb: 'drink' ,item: drink_maximal[1], state: 0, maximal: maximality[drink_maximal[1]],  sentence: sentences[drink_maximal[1]] ,  item_type:'control'},
+    {verb: 'drink' ,item: drink_non_maximal[1], state: 0, maximal: maximality[drink_non_maximal[1]], sentence: sentences[drink_non_maximal[1]],  item_type:'control' },
 
   ];
 
