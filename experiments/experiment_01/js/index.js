@@ -245,3 +245,4 @@ function init() {
 
   exp.go(); //show first slide
 }
+
