@@ -105,9 +105,9 @@ function make_slides(f) {
         age : $("#age").val(),
         gender : $("#gender").val(),
         education : $("#education").val(),
-        difficult_items : $("#difficult_items").val(),
         item_comments : $("#item_comments").val(),
         comments : $("#comments").val(),
+        
         problems: $("#problems").val(),
         fairprice: $("#fairprice").val()
       };
@@ -247,4 +247,3 @@ function init() {
 
   exp.go(); //show first slide
 }
-
